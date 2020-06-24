@@ -36,13 +36,13 @@ type Options struct {
 func NewOptions() Options {
 	var opts Options
 	kingpin.Flag("verbose", "enable additional logging").Short('v').BoolVar(&opts.Debug)
-	kingpin.Flag("listen-addr", "address:port to listen for requests on").Default(":8099").StringVar(&opts.ListenAddr)
+	kingpin.Flag("listen-addr", "address:port to listen for requests on").Default(":443").StringVar(&opts.ListenAddr)
 	kingpin.Flag("metrics-listen-addr", "address:port to listen for Prometheus metrics on, empty to disable").Default("").StringVar(&opts.MetricsListenAddr)
 	kingpin.Flag("pprof-listen-addr", "address:port to listen for pprof on, empty to disable").Default("").StringVar(&opts.PprofListenAddr)
 	kingpin.Flag("allowed-endpoint", "allowed endpoint (Host header) to accept for incoming requests").Required().PlaceHolder("my.host.example.com:8099").StringVar(&opts.AllowedSourceEndpoint)
 	kingpin.Flag("allowed-source-subnet", "allowed source IP addresses with netmask").Default("127.0.0.1/32").StringsVar(&opts.AllowedSourceSubnet)
 	kingpin.Flag("aws-credentials", "set of AWS credentials").PlaceHolder("\"AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY\"").StringsVar(&opts.AwsCredentials)
-	kingpin.Flag("aws-region", "send requests to this AWS S3 region").Default("eu-central-1").StringVar(&opts.Region)
+	kingpin.Flag("aws-region", "send requests to this AWS S3 region").Default("us-east-1").StringVar(&opts.Region)
 	kingpin.Flag("upstream-insecure", "use insecure HTTP for upstream connections").BoolVar(&opts.UpstreamInsecure)
 	kingpin.Flag("upstream-endpoint", "use this S3 endpoint for upstream connections, instead of public AWS S3").StringVar(&opts.UpstreamEndpoint)
 	kingpin.Flag("cert-file", "path to the certificate file").Default("").StringVar(&opts.CertFile)
